@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 📘Rin Docs
+    url: https://docs.openrin.org/en
+    about: Please check the documentation for answers to common questions.
+  - name: 🌸Rin upstream
+    url: https://github.com/openRin/Rin/issues
+    about: Problems in Rin itself can also be reported to the upstream project.

@@ -1,0 +1,27 @@
+{
+  "name": "@rin/obsidian-publish",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Publish Obsidian notes to the Rin blog: check -> publish",
+  "bin": {
+    "obsidian-publish": "./src/cli.ts"
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@rin/api": "workspace:*",
+    "rehype-raw": "^7.0.0",
+    "rehype-stringify": "^10.0.1",
+    "remark-gfm": "^4.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.0",
+    "unified": "^11.0.5"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.2",
+    "typescript": "^5.7.3"
+  }
+}
