@@ -15,6 +15,8 @@ const PNG = Uint8Array.from(
   atob("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="),
   (c) => c.charCodeAt(0),
 );
+/** SVG rendering uses macOS `sips`; tests that need it are skipped elsewhere (e.g. Linux CI). */
+const HAS_SIPS = Bun.which("sips") !== null;
 const SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="20" viewBox="0 0 40 20"><rect width="40" height="20" fill="#3a6"/></svg>`;
 
 const plain = { embed: (t: string) => `[embed:${t}]`, link: (t: string, l?: string) => l ?? t };
@@ -147,7 +149,7 @@ describe("vault pipeline", () => {
     expect(v.files.some((f) => f.startsWith(".obsidian"))).toBe(false);
   });
 
-  it("builds a bundle: title from H1, images localized, SVG rendered to PNG", async () => {
+  it.skipIf(!HAS_SIPS)("builds a bundle: title from H1, images localized, SVG rendered to PNG", async () => {
     const r = await buildBundle(new Vault(vaultDir), NOTE, { workdir, site: "https://blog.test" });
     expect(r.errors).toEqual([]);
     expect(r.meta.title).toBe("测试文章");
@@ -180,7 +182,7 @@ describe("vault pipeline", () => {
     await expect(publishNote(new Vault(vaultDir), NOTE, new FakeBlog(), { workdir, yes: true })).rejects.toThrow("检查未通过");
   });
 
-  it("publishes, skips unchanged, updates on change, reuses uploads, recreates deleted posts", async () => {
+  it.skipIf(!HAS_SIPS)("publishes, skips unchanged, updates on change, reuses uploads, recreates deleted posts", async () => {
     const blog = new FakeBlog();
     const vault = () => new Vault(vaultDir);
 
@@ -219,7 +221,7 @@ describe("vault pipeline", () => {
     expect(recreated.plan.feedId).toBe(103);
   });
 
-  it("--feed-id links a note to an existing post", async () => {
+  it.skipIf(!HAS_SIPS)("--feed-id links a note to an existing post", async () => {
     const blog = new FakeBlog();
     blog.feeds.set(7, { id: 7, title: "旧", draft: 0, listed: 1, content: "" });
     const r = await publishNote(new Vault(vaultDir), NOTE, blog, { workdir, yes: true, feedId: 7 });
