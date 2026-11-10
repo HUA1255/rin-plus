@@ -1,5 +1,7 @@
 # rin-plus
 
+![rin-plus 前端预览：首页个人名片、置顶文章与文章详情页](docs/screenshots/demo.gif)
+
 基于 [Rin](https://github.com/openRin/Rin) 的个人博客系统，跑在 Cloudflare Workers + D1 + R2 上。在 Rin 的基础上加强了安全性，改版了首页，并附带把 Obsidian / 语雀文章发布到博客的命令行工具。
 
 A personal blog based on [Rin](https://github.com/openRin/Rin) (Cloudflare Workers + D1 + R2), with security hardening, a redesigned homepage, and CLI tools that publish Obsidian / Yuque notes to the blog.
